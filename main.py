@@ -6,7 +6,7 @@ class Map:
         self.length = l
     
     def print_map(self):
-        print(self.str)
+        return self.str
     
     def chage_length(self, l):
         self.str = ('\U0001F332' * l + '\n') * l 
@@ -47,10 +47,23 @@ def move_unit(map, kaktus, direction):
         map.print_map()
         direction = input('direction - ')
 
+bot = telebot.TeleBot("5793642588:AAE6hNG_44UDkYLNwxaHSDQKIqPX4hqplPM")
+
+    
 str_map = ('\U0001F332' * 13 + '\n') * 13
 map = Map(str_map, 13)
-map.print_map()
 map.enter_object(6, 6, '\U0001F335')
 kaktus = Unit()
-map.print_map()
-move_unit(map, kaktus, input('direction - '))
+
+@bot.message_handler(content_types=['text'])
+def get_text(message):
+    if message.text.lower() == 'поехали':
+        bot.send_message(message.chat.id, map.print_map())
+    if message.text.lower() in ['w', 'd', 's', 'a']:
+        map.delete_object(kaktus.x, kaktus.y)
+        kaktus.move(message.text.lower())
+        map.enter_object(kaktus.x, kaktus.y, '\U0001F335')
+        bot.send_message(message.chat.id, map.print_map())
+
+#move_unit(map, kaktus, input('direction - '))
+bot.infinity_polling()
