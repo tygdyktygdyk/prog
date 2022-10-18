@@ -1,6 +1,7 @@
 import telebot
 import func
-from classes import *
+from maps import *
+from units import *
 
 bot = telebot.TeleBot("5793642588:AAE6hNG_44UDkYLNwxaHSDQKIqPX4hqplPM")
     
