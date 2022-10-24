@@ -1,4 +1,4 @@
-class Map:
+class Space:
     def __init__(self, s, l):
         self.__str = s
         self.__length = l
