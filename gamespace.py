@@ -1,19 +1,21 @@
 class Space:
-    def __init__(self, s, l):
+    def __init__(self, s):
         self.__str = s
-        self.__length = l
+        self.__length = 13
     
     def print_map(self):
         return self.__str
-    
-    def chage_length(self, l):
-        self.__str = ('\U0001F332' * l + '\n') * l 
-        self.__length = l
-    
-    def enter_object(self, coords, a):
+
+    def print_object(self, coords):
+        if 0 > coords[0] > self.__length and 0 > coords[0] > self.__length: 
+            return False
         tmp = coords[0] + coords[1] * (self.__length + 1)
-        self.__str = self.__str[:tmp] + a + self.__str[(tmp+1):]
+        return self.__str[tmp]
     
-    def delete_object(self, coords):
+    def enter_object(self, coords, emoji):
         tmp = coords[0] + coords[1] * (self.__length + 1)
-        self.__str = self.__str[:tmp] + '\U0001F332' + self.__str[(tmp+1):]
+        self.__str = self.__str[:tmp] + emoji + self.__str[(tmp+1):]
+    
+    def delete_object(self, coords, ground):
+        tmp = coords[0] + coords[1] * (self.__length + 1)
+        self.__str = self.__str[:tmp] + ground + self.__str[(tmp+1):]
